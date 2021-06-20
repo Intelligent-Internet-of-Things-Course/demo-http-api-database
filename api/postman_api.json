@@ -1,0 +1,544 @@
+{
+	"info": {
+		"_postman_id": "61f81a82-1a1e-49b2-a4ef-89d391271693",
+		"name": "DT-orchestration-Demo-Inventory",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "DigitalTwin",
+			"item": [
+				{
+					"name": "Get All DigitalTwins",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get DigitalTwin By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create DigitalTwin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"dt00001\",\r\n    \"type\": \"MQTT\",\r\n    \"running\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update DigitalTwin By Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"dt00001\",\r\n    \"type\": \"COAP\",\r\n    \"running\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete DigitalTwin By Id",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"dt00001\",\r\n    \"type\": \"COAP\",\r\n    \"idDtConfiguration\": \"conf00001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Configuration",
+			"item": [
+				{
+					"name": "Get Configuration Of a Dt",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf/",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create MQTT2MQTT Configuration Of a Dt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"confId\": \"conf00001\",\r\n    \"confType\": \"wldt\",\r\n    \"confValue\": {\r\n        \"engine\": {\r\n            \"attributes\": {\r\n                \"threadPoolSize\": 5,\r\n                \"deviceNameSpace\": \"it.unimore.dipi.things\",\r\n                \"wldtBaseIdentifier\": \"wldt\",\r\n                \"wldtStartupTimeSeconds\": 10,\r\n                \"activeProtocolList\": {\r\n                    \"activeProtocol1\": \"mqtt\"\r\n                },\r\n                \"applicationMetricsEnabled\": false,\r\n                \"applicationMetricsReportingPeriodSeconds\": 10,\r\n                \"metricsReporterList\" :{\r\n                    \"metricsReporter1\": \"csv\",\r\n                    \"metricsReporter2\": \"graphite\"\r\n                },\r\n                \"graphiteReporterAddress\": \"127.0.0.1\",\r\n                \"graphiteReporterPort\": 2003,\r\n                \"graphitePrefix\": \"wldt\"\r\n            }\r\n        },\r\n        \"workers\": [\r\n            {\r\n                \"workerId\": \"worker00001\",\r\n                \"workerType\": \"MQTT2MQTT\",\r\n                \"attributes\": {\r\n                    \"dtForwardingEnabled\": true,\r\n                    \"dtPublishingQoS\": 2,\r\n                    \"brokerAddress\": \"127.0.0.1\",\r\n                    \"brokerPort\": 1883,\r\n                    \"brokerLocal\": true,\r\n                    \"brokerClientUsername\": null,\r\n                    \"brokerClientPassword\": null,\r\n                    \"brokerSecureCommunicationRequired\": false,\r\n                    \"brokerServerCertPath\": null,\r\n\r\n                    \"destinationBrokerAddress\": \"127.0.0.1\",\r\n                    \"destinationBrokerPort\": 1884,\r\n                    \"destinationBrokerLocal\": true,\r\n                    \"destinationBrokerClientUsername\": null,\r\n                    \"destinationBrokerClientPassword\": null,\r\n                    \"destinationBrokerSecureCommunicationRequired\": false,\r\n                    \"destinationBrokerServerCertPath\": null,\r\n\r\n                    \"destinationBrokerBaseTopic\": null,\r\n\r\n                    \"deviceId\": \"it.unimore.dipi.things:dummy_device:0be64e3d-985d-43f2-b810-10e8e1d6862a\",\r\n\r\n                    \"topicList\" : {\r\n                        \"topic1\" : {\r\n                            \"id\" : \"gpsTelemetryTopic\",\r\n                            \"resourceId\" : \"gps\",\r\n                            \"topic\" : \"/topic/iot/device/test/{{device_id}}/gps\",\r\n                            \"type\" : \"device_outgoing\"\r\n                        },\r\n                        \"topic2\" : {\r\n                            \"id\" : \"batteryTelemetryTopic\",\r\n                            \"resourceId\" : \"battery\",\r\n                            \"topic\" : \"/topic/iot/device/test/{{device_id}}/battery\",\r\n                            \"type\" : \"device_outgoing\"\r\n                        }\r\n                        \r\n                    }\r\n\r\n                }\r\n            }  \r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create COAP2COAP Configuration Of a Dt",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"confId\": \"conf00001\",\r\n    \"confType\": \"wldt\",\r\n    \"confValue\": {\r\n        \"engine\": {\r\n            \"attributes\": {\r\n                \"threadPoolSize\": 5,\r\n                \"deviceNameSpace\": \"it.unimore.dipi.things\",\r\n                \"wldtBaseIdentifier\": \"wldt\",\r\n                \"wldtStartupTimeSeconds\": 10,\r\n                \"activeProtocolList\" : null,\r\n                \"applicationMetricsEnabled\": false,\r\n                \"applicationMetricsReportingPeriodSeconds\": 10,\r\n                \"metricsReporterList\" :{\r\n                    \"metricsReporter1\": \"csv\",\r\n                    \"metricsReporter2\": \"graphite\"\r\n                },\r\n                \"graphiteReporterAddress\": \"127.0.0.1\",\r\n                \"graphiteReporterPort\": 2003,\r\n                \"graphitePrefix\": \"wldt\"\r\n\r\n            }\r\n        },\r\n        \"workers\": [\r\n            {\r\n                \"workerId\": \"worker00001\",\r\n                \"workerType\": \"COAP2COAP\",\r\n                \"attributes\": {\r\n                    \"cacheEnabled\": false,\r\n                    \"resourceDiscovery\": true,\r\n                    \"resourceList\": null,\r\n                    \"deviceAddress\": \"127.0.0.1\",\r\n                    \"devicePort\": 5683,\r\n                    \"deviceSecurePort\": 5684\r\n\r\n                }\r\n            }  \r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create Other Type of Configuration",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"confId\": \"conf00003\",\r\n    \"confType\": \"wldt\",\r\n    \"confValue\": {\r\n        \"engine\": {\r\n            \"attributes\": {\r\n                \"threadPoolSize\": 5,\r\n                \"deviceNameSpace\": \"it.unimore.dipi.things\",\r\n                \"wldtBaseIdentifier\": \"wldt\",\r\n                \"wldtStartupTimeSeconds\": 10,\r\n                \"activeProtocolList\" : null,\r\n                \"applicationMetricsEnabled\": false,\r\n                \"applicationMetricsReportingPeriodSeconds\": 10,\r\n                \"metricsReporterList\": \"csv, graphite\",\r\n                \"graphiteReporterAddress\": \"127.0.0.1\",\r\n                \"graphiteReporterPort\": 2003,\r\n                \"graphitePrefix\": \"wldt\"\r\n\r\n            }\r\n        },\r\n        \"workers\": [\r\n            {\r\n                \"workerId\": \"worker00001\",\r\n                \"type\": \"COAP2COAP\",\r\n                \"attributes\": {\r\n                    \"cacheEnabled\": false,\r\n                    \"resourceDiscovery\": true,\r\n                    \"resourceList\": null,\r\n                    \"deviceAddress\": \"127.0.0.1\",\r\n                    \"devicePort\": 5683,\r\n                    \"deviceSecurePort\": 5684\r\n\r\n                }\r\n            }  \r\n        ]\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00002/conf",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00002",
+								"conf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Configuration Of a Dt",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"confId\": \"conf00001\",\n    \"confType\": \"wldt\",\n    \"confValue\": {\n        \"engine\": {\n            \"attributes\": {\n                \"deviceNameSpace\": \"it.unimore.dipi.things\",\n                \"activeProtocolList\": \"mqtt\",\n                \"metricsReporterList\": \"csv\",\n                \"threadPoolSize\": 5,\n                \"applicationMetricsEnabled\": false,\n                \"wldtBaseIdentifier\": \"wldt\",\n                \"applicationMetricsReportingPeriodSeconds\": 10,\n                \"graphiteReporterAddress\": \"127.0.0.1\",\n                \"wldtStartupTimeSeconds\": 10,\n                \"graphiteReporterPort\": 2003,\n                \"graphitePrefix\": \"wldt\"\n            }\n        },\n        \"workers\": [\n            {\n                \"workerId\": \"worker00001\",\n                \"type\": \"COAP2COAP\",\n                \"attributes\": {\n                    \"cacheEnabled\": false,\n                    \"deviceAddress\": \"127.0.0.1\",\n                    \"deviceSecurePort\": 5684,\n                    \"devicePort\": 5683,\n                    \"resourceDiscovery\": true,\n                    \"resourceList\": null\n                }\n            }\n        ]\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Configuration Of a Dt",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"dt00001\",\r\n    \"type\": \"COAP\",\r\n    \"idDtConfiguration\": \"conf00001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Worker",
+			"item": [
+				{
+					"name": "Get All Workers of a Certain DigitalTwin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf/worker",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf",
+								"worker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get Worker of a Certain DigitalTwin By Id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf/worker/worker00001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf",
+								"worker",
+								"worker00001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a New Worker (MQTT2MQTT)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"workerId\": \"worker00002\",\n    \"workerType\": \"MQTT2MQTT\",\n    \"attributes\": {\n        \"dtForwardingEnabled\": true,\n        \"dtPublishingQoS\": 2,\n        \"brokerAddress\": \"127.0.0.1\",\n        \"brokerPort\": 1883,\n        \"brokerLocal\": true,\n        \"brokerClientUsername\": null,\n        \"brokerClientPassword\": null,\n        \"brokerSecureCommunicationRequired\": false,\n        \"brokerServerCertPath\": null,\n\n        \"destinationBrokerAddress\": \"127.0.0.1\",\n        \"destinationBrokerPort\": 1884,\n        \"destinationBrokerLocal\": true,\n        \"destinationBrokerClientUsername\": null,\n        \"destinationBrokerClientPassword\": null,\n        \"destinationBrokerSecureCommunicationRequired\": false,\n        \"destinationBrokerServerCertPath\": null,\n\n        \"destinationBrokerBaseTopic\": null,\n\n        \"deviceId\": \"it.unimore.dipi.things:dummy_device:0be64e3d-985d-43f2-b810-10e8e1d6862a\",\n\n        \"topicList\": null\n\n    }\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf/worker",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf",
+								"worker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Create a New Worker (COAP2COAP)",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"workerId\": \"worker00002\",\n    \"workerType\": \"COAP2COAP\",\n    \"attributes\": {\n        \"cacheEnabled\": false,\n        \"resourceDiscovery\": true,\n        \"resourceList\": null,\n        \"deviceAddress\": \"127.0.0.1\",\n        \"devicePort\": 5683,\n        \"deviceSecurePort\": 5684\n    }\n}  ",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf/worker",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf",
+								"worker"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update worker by Id",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"workerId\": \"worker00001\",\r\n    \"type\": \"MQTT2MQTT\",\r\n    \"attributes\": {\r\n        \"brokerPort\": 1883,\r\n        \"destinationBrokerPort\": 1884,\r\n        \"brokerClientPassword\": null,\r\n        \"deviceId\": \"it.unimore.dipi.things:dummy_device:0be64e3d-985d-43f2-b810-10e8e1d6862a\",\r\n        \"brokerAddress\": \"127.0.0.1\",\r\n        \"brokerClientUsername\": null,\r\n        \"destinationBrokerServerCertPath\": null,\r\n        \"topicList\": null,\r\n        \"destinationBrokerBaseTopic\": null,\r\n        \"dtForwardingEnabled\": true,\r\n        \"destinationBrokerAddress\": \"127.0.0.1\",\r\n        \"destinationBrokerLocal\": true,\r\n        \"destinationBrokerSecureCommunicationRequired\": false,\r\n        \"dtPublishingQoS\": 0,\r\n        \"brokerLocal\": true,\r\n        \"destinationBrokerClientPassword\": null,\r\n        \"brokerServerCertPath\": null,\r\n        \"destinationBrokerClientUsername\": null,\r\n        \"brokerSecureCommunicationRequired\": false\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf/worker/worker00001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf",
+								"worker",
+								"worker00001"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Worker Of a Configuration",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"dt00001\",\r\n    \"type\": \"COAP\",\r\n    \"idDtConfiguration\": \"conf00001\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:7070/digitalTwin/dt00001/conf/worker/worker00001",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "7070",
+							"path": [
+								"digitalTwin",
+								"dt00001",
+								"conf",
+								"worker",
+								"worker00001"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}

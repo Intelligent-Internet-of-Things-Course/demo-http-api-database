@@ -1,0 +1,20 @@
+server:
+  applicationConnectors:
+  - type: http
+    port: 7070
+    bindHost: 0.0.0.0
+  adminConnectors:
+  - type: http
+    port: 7071
+    bindHost: 0.0.0.0
+
+swagger:
+  resourcePackage: it.unimore.dipi.iot.http.api.resources
+
+mysqlUrl: jdbc:mysql://127.0.0.1:3306/api-manager
+mysqlUsername: api-manager
+mysqlPassword: apiT3st
+
+#logging:
+  # The default level of all loggers. Can be OFF, ERROR, WARN, INFO, DEBUG, TRACE, or ALL.
+#  level: INFO
