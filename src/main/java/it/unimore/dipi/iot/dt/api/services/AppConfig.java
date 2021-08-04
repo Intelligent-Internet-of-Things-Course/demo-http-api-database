@@ -25,7 +25,7 @@ public class AppConfig extends Configuration {
 
     private JdbcDataAccess jdbcDataAccess = null;
 
-    public IEdgeNodeDataManager getConduitsZonesDataManager(){
+    public IEdgeNodeDataManager getEdgeNodeDataManager(){
 
         if(this.conduitsZonesDataManager == null)
             this.conduitsZonesDataManager = new MySqlEdgeNodeDataManger(getJdbcDataAccess());

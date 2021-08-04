@@ -46,7 +46,7 @@ public class EdgeNodeResource {
 
             logger.info("Loading all stored edge nodes ...");
 
-            List<EdgeNodeDescriptor> edgeNodeList = this.conf.getConduitsZonesDataManager().getEdgeNodeList();
+            List<EdgeNodeDescriptor> edgeNodeList = this.conf.getEdgeNodeDataManager().getEdgeNodeList();
 
             if(edgeNodeList == null)
                 return Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.NOT_FOUND.getStatusCode(),"Devices Not Found !")).build();
@@ -75,7 +75,7 @@ public class EdgeNodeResource {
             if(edgeNodeId == null)
                 return Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.BAD_REQUEST.getStatusCode(),"Invalid DigitalTwin Id Provided !")).build();
 
-            Optional<EdgeNodeDescriptor> optionalEdgeNodeDescriptor = this.conf.getConduitsZonesDataManager().getEdgeNodeById(edgeNodeId);
+            Optional<EdgeNodeDescriptor> optionalEdgeNodeDescriptor = this.conf.getEdgeNodeDataManager().getEdgeNodeById(edgeNodeId);
 
             if(!optionalEdgeNodeDescriptor.isPresent())
                 return Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.NOT_FOUND.getStatusCode(),"Resource Not Found !")).build();
@@ -106,7 +106,7 @@ public class EdgeNodeResource {
             if(edgeNodeCreationRequest == null)
                 return Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.BAD_REQUEST.getStatusCode(),"Invalid request payload")).build();
 
-            EdgeNodeDescriptor edgeNodeDescriptor = this.conf.getConduitsZonesDataManager().createNewEdgeNode(edgeNodeCreationRequest);
+            EdgeNodeDescriptor edgeNodeDescriptor = this.conf.getEdgeNodeDataManager().createNewEdgeNode(edgeNodeCreationRequest);
 
             return Response.created(new URI(String.format("%s/%s",uriInfo.getAbsolutePath(),edgeNodeDescriptor.getId()))).build();
 
@@ -139,10 +139,10 @@ public class EdgeNodeResource {
                 return Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.BAD_REQUEST.getStatusCode(),"Invalid request ! Check DigitalTwin Id")).build();
 
             //Check if the device is available and correctly registered otherwise a 404 response will be sent to the client
-            if(!this.conf.getConduitsZonesDataManager().getEdgeNodeById(edgeNodeId).isPresent())
+            if(!this.conf.getEdgeNodeDataManager().getEdgeNodeById(edgeNodeId).isPresent())
                 return Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.NOT_FOUND.getStatusCode(),"Resource not found !")).build();
 
-            this.conf.getConduitsZonesDataManager().updateEdgeNode(edgeNodeUpdateRequest);
+            this.conf.getEdgeNodeDataManager().updateEdgeNode(edgeNodeUpdateRequest);
 
             return Response.noContent().build();
 
@@ -169,11 +169,11 @@ public class EdgeNodeResource {
                 return Response.status(Response.Status.BAD_REQUEST).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.BAD_REQUEST.getStatusCode(),"Invalid DigitalTwin Id Provided !")).build();
 
             //Check if the device is available or not
-            if(!this.conf.getConduitsZonesDataManager().getEdgeNodeById(edgeNodeId).isPresent())
+            if(!this.conf.getEdgeNodeDataManager().getEdgeNodeById(edgeNodeId).isPresent())
                 return Response.status(Response.Status.NOT_FOUND).type(MediaType.APPLICATION_JSON_TYPE).entity(new ErrorMessage(Response.Status.NOT_FOUND.getStatusCode(),"Resource Not Found !")).build();
 
             //Delete the location
-            this.conf.getConduitsZonesDataManager().deleteEdgeNode(edgeNodeId);
+            this.conf.getEdgeNodeDataManager().deleteEdgeNode(edgeNodeId);
 
             return Response.noContent().build();
 
